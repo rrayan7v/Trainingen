@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci en Tafelkaart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+        button {
+            margin: 5px 0;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .output {
+            margin-top: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Fibonacci Generator</h1>
+    <p>Voer een getal in om de Fibonacci-reeks te genereren:</p>
+    <input type="number" id="fibonacciInput" placeholder="Voer een getal in">
+    <button onclick="generateFibonacci()">Genereer Fibonacci-reeks</button>
+    <div class="output" id="fibonacciOutput"></div>
+
+    <hr>
+
+    <h1>Tafelkaart Generator</h1>
+    <p>Voer een getal in om de tafelkaart te genereren:</p>
+    <input type="number" id="tafelInput" placeholder="Voer een getal in">
+    <button onclick="generateTafelkaart()">Genereer Tafelkaart</button>
+    <div class="output" id="tafelkaartOutput"></div>
+
+    <script>
+        // Fibonacci-reeks generator
+        function generateFibonacci() {
+            const n = parseInt(document.getElementById("fibonacciInput").value);
+            if (isNaN(n) || n <= 0) {
+                document.getElementById("fibonacciOutput").innerHTML = "Voer een geldig positief getal in.";
+                return;
+            }
+
+            let fibonacci = [1, 2];
+            for (let i = 2; i < n; i++) {
+                fibonacci.push(fibonacci[i - 1] + fibonacci[i - 2]);
+            }
+            
+            document.getElementById("fibonacciOutput").innerHTML = "Fibonacci-reeks: " + fibonacci.join(", ");
+        }
+
+        // Tafelkaart generator
+        function generateTafelkaart() {
+            const n = parseInt(document.getElementById("tafelInput").value);
+            if (isNaN(n) || n <= 0) {
+                document.getElementById("tafelkaartOutput").innerHTML = "Voer een geldig positief getal in.";
+                return;
+            }
+
+            let result = '<table><tr><th>Tafel van</th>';
+            
+            for (let i = 1; i <= n; i++) {
+                result += `<th>${i}</th>`;
+            }
+            result += '</tr>';
+            
+            for (let i = 1; i <= n; i++) {
+                result += `<tr><td>${i}</td>`;
+                for (let j = 1; j <= n; j++) {
+                    result += `<td>${i * j}</td>`;
+                }
+                result += '</tr>';
+            }
+            
+            result += '</table>';
+            
+            document.getElementById("tafelkaartOutput").innerHTML = result;
+        }
+    </script>
+
+</body>
+</html>
